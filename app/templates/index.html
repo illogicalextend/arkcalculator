@@ -1,0 +1,129 @@
+<html lang="en">
+{% include 'base.html' %}
+
+<body>
+  <br>
+  <center><b>Ark Coin Voting Calculator</b></center><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <center>
+          <form class="form-inline">
+            <div class="form-group">
+              <label for="total">Ark Address:</label>
+              <input type="text" class="form-control" id="total" placeholder="Enter address">
+            </div>
+            <button type="submit" class="btn btn-default">Calculate</button>
+          </form>
+        </center>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="boxValue">
+              {{ coin_balance['balance'] }}
+            </div>
+            <div id="">
+              <center>Total Address Balance</center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="boxValue">
+              {{ total_received }}
+            </div>
+            <div id="">
+              <center>Total Voting Bonus Received</center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="boxValue">
+              ${{ current_usd }}
+            </div>
+            <div id="">
+              <center>Current Ark Price</center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-bordered">
+          <caption>Delegate Payments Received</caption>
+          <tr class="info">
+            <th><div class="smallText">Position</div></th>
+            <th><div class="smallText">Amount</div></th>
+            <th><div class="smallText">Timestamp</div></th>
+            <th><div class="smallText">Sender ID</div></th>
+            <th><div class="smallText">Fee</div></th>
+            <tr>
+              {% for payment in del_payments %}
+              <tr class="success">
+                <td><div class="smallText">{{ loop.index }}</div></td>
+                <td><div class="smallText">{{ payment['amount'] }}</div></td>
+                <td><div class="smallText">{{ payment['timestamp'] }}</div></td>
+                <td><div class="smallText">{{ payment['senderId'] }}.. </div></td>
+                <td><div class="smallText">{{ payment['fee'] }} </div></td>
+              </tr>
+              {% endfor %}
+            </tr>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-bordered">
+          <caption>Future Payment Forecast</caption>
+          <tr class="info">
+            <th><div class="smallText">Position</div></th>
+            <th><div class="smallText">Duration</div></th>
+            <th><div class="smallText">Coins</div></th>
+            <th><div class="smallText">USD</div></th>
+          </tr>
+              <tr class="warning">
+                <td><div class="smallText">1</div></td>
+                <td><div class="smallText">1 day</div></td>
+                <td><div class="smallText">{{ coin_balance['1day'] }}</div></td>
+                <td><div class="smallText">${{ coin_balance['1dayusd'] }}</div></td>
+              </tr>
+              <tr class="warning">
+                <td><div class="smallText">2</div></td>
+                <td><div class="smallText">1 Week</div></td>
+                <td><div class="smallText">{{ coin_balance['1week'] }}</div></td>
+                <td><div class="smallText">${{ coin_balance['1weekusd'] }}</div></td>
+
+              </tr>
+              <tr class="warning">
+                <td><div class="smallText">3</div></td>
+                <td><div class="smallText">1 Month</div></td>
+                <td><div class="smallText">{{ coin_balance['1month'] }}</div></td>
+                <td><div class="smallText">${{ coin_balance['1monthusd'] }}</div></td>
+
+              </tr>
+              <tr class="warning">
+                <td><div class="smallText">4</div></td>
+                <td><div class="smallText">1 year</div></td>
+                <td><div class="smallText">{{ coin_balance['1year'] }} </div></td>
+                <td><div class="smallText">${{ coin_balance['1yearusd'] }}</div></td>
+
+              </tr>
+            </tr>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+
+</html>
