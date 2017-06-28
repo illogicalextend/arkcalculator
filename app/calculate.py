@@ -2,10 +2,9 @@ from arky import api
 from arky.util import stats
 import urllib, json
 
-def del_payments():
+def del_payments(user_address):
     api.use("ark")
-    #print api.Account.getAccount("AUahWfkfr5J4tYakugRbfow7RWVTK35GPW")
-    history = stats.getHistory("AJHsDRdyv5D62Btug5YQg598vqFTcGADqZ")
+    history = stats.getHistory(user_address)
     del_payment = []
     for transaction in history:
         if transaction["senderId"] == "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK":
@@ -15,9 +14,9 @@ def del_payments():
             del_payment.append(transaction)
     return del_payment
 
-def total_received():
+def total_received(user_address):
     api.use("ark")
-    history = stats.getHistory("AJHsDRdyv5D62Btug5YQg598vqFTcGADqZ")
+    history = stats.getHistory(user_address)
     total = 0.0
     for transaction in history:
         if transaction["senderId"] == "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK":
@@ -30,10 +29,10 @@ def get_usd():
     data = json.loads(response.read())
     return float(data[0]["price_usd"])
 
-def coin_balance():
+def coin_balance(user_address):
     interest_rate = 0.00010958904 # 0.04 / 365
     usd_value = get_usd()
-    balance = stats.getBalanceHistory("AJHsDRdyv5D62Btug5YQg598vqFTcGADqZ")
+    balance = stats.getBalanceHistory(user_address)
     balance = balance[-1][1]
     estimates = {}
     estimates['balance'] = balance
