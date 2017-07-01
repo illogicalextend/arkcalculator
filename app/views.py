@@ -3,10 +3,14 @@ from flask import request
 from app import app
 import calculate
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    user_address = request.args.get('address')
+    if request.method == 'POST':
+        user_address = request.form['total']
+    elif request.args.get('address'):
+        user_address = request.args.get('address')
+    else:
+        user_address = "AJHsDRdyv5D62Btug5YQg598vqFTcGADqZ"
     return render_template("index.html",
     del_payments=calculate.del_payments(user_address),
     coin_balance=calculate.coin_balance(user_address),
