@@ -1,17 +1,28 @@
 from arky import api
 from arky.util import stats
+from decimal import Decimal
 import urllib, json
+
+def get_delegates():
+    api.use("ark")
+    delegate = api.Delegate()
+    delegates = delegate.getDelegates()
+    return delegates['delegates']
 
 def del_payments(user_address):
     api.use("ark")
     history = stats.getHistory(user_address)
     del_payment = []
+    delegates_list = get_delegates()
     for transaction in history:
-        if transaction["senderId"] == "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK":
-            transaction["senderId"] == str(transaction["senderId"])
-            transaction["senderId"] = transaction["senderId"][0:15]
-            transaction["amount"] = float(transaction["amount"] / 100000000)
-            del_payment.append(transaction)
+        for delegate in delegates_list:
+            if transaction["senderId"] == delegate['address']:
+                transaction["senderId"] == str(transaction["senderId"])
+                transaction["senderId"] = transaction["senderId"][0:8]
+                transaction["amount"] = float(Decimal(transaction["amount"]) / 100000000)
+                transaction["fee"] = float(Decimal(transaction["fee"]) / 100000000)
+                transaction["del_username"] = delegate['username']
+                del_payment.append(transaction)
     return del_payment
 
 def total_received(user_address):
