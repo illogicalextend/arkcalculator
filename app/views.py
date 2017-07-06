@@ -12,7 +12,7 @@ def index():
     else:
         user_address = "AJHsDRdyv5D62Btug5YQg598vqFTcGADqZ"
     return render_template("index.html",
-    del_payments=calculate.del_payments(user_address),
+    del_payments=calculate.del_payments(user_address)['del_payment'],
     coin_balance=calculate.coin_balance(user_address),
     current_usd=calculate.get_usd(),
-    total_received=calculate.total_received(user_address))
+    total_received=calculate.del_payments(user_address)['total_received'])

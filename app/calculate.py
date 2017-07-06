@@ -14,6 +14,7 @@ def del_payments(user_address):
     history = stats.getHistory(user_address)
     del_payment = []
     delegates_list = get_delegates()
+    total_received = 0.0
     for transaction in history:
         for delegate in delegates_list:
             if transaction["senderId"] == delegate['address']:
@@ -23,16 +24,8 @@ def del_payments(user_address):
                 transaction["fee"] = float(Decimal(transaction["fee"]) / 100000000)
                 transaction["del_username"] = delegate['username']
                 del_payment.append(transaction)
-    return del_payment
-
-def total_received(user_address):
-    api.use("ark")
-    history = stats.getHistory(user_address)
-    total = 0.0
-    for transaction in history:
-        if transaction["senderId"] == "AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK":
-            total = total + transaction["amount"]
-    return float(total / 100000000)
+                total_received = total_received + transaction["amount"]
+    return {'del_payment':del_payment, 'total_received':total_received}
 
 def get_usd():
     url = "https://api.coinmarketcap.com/v1/ticker/ark/"
