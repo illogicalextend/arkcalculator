@@ -20,7 +20,7 @@
     </div>
     <br>
     <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="boxValue">
@@ -32,19 +32,31 @@
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="boxValue">
               {{ total_received }}
             </div>
             <div id="">
-              <center>Total Voting Bonus Received</center>
+              <center>Total Voting Bonus </center>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="boxValue">
+              {{ top_delegate }}
+            </div>
+            <div id="">
+              <center>Most Delegate Payments</center>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="boxValue">
@@ -92,39 +104,40 @@
             <th><div class="smallText">Coins</div></th>
             <th><div class="smallText">USD</div></th>
           </tr>
-              <tr class="warning">
-                <td><div class="smallText">1</div></td>
-                <td><div class="smallText">1 day</div></td>
-                <td><div class="smallText">{{ coin_balance['1day'] }}</div></td>
-                <td><div class="smallText">${{ coin_balance['1dayusd'] }}</div></td>
-              </tr>
-              <tr class="warning">
-                <td><div class="smallText">2</div></td>
-                <td><div class="smallText">1 Week</div></td>
-                <td><div class="smallText">{{ coin_balance['1week'] }}</div></td>
-                <td><div class="smallText">${{ coin_balance['1weekusd'] }}</div></td>
-
-              </tr>
-              <tr class="warning">
-                <td><div class="smallText">3</div></td>
-                <td><div class="smallText">1 Month</div></td>
-                <td><div class="smallText">{{ coin_balance['1month'] }}</div></td>
-                <td><div class="smallText">${{ coin_balance['1monthusd'] }}</div></td>
-
-              </tr>
-              <tr class="warning">
-                <td><div class="smallText">4</div></td>
-                <td><div class="smallText">1 year</div></td>
-                <td><div class="smallText">{{ coin_balance['1year'] }} </div></td>
-                <td><div class="smallText">${{ coin_balance['1yearusd'] }}</div></td>
-
-              </tr>
-            </tr>
+          <tr class="warning">
+            <td><div class="smallText">1</div></td>
+            <td><div class="smallText">1 day</div></td>
+            <td><div class="smallText">{{ coin_balance['1day'] }}</div></td>
+            <td><div class="smallText">${{ coin_balance['1dayusd'] }}</div></td>
           </tr>
-        </table>
-      </div>
-    </div>
+          <tr class="warning">
+            <td><div class="smallText">2</div></td>
+            <td><div class="smallText">1 Week</div></td>
+            <td><div class="smallText">{{ coin_balance['1week'] }}</div></td>
+            <td><div class="smallText">${{ coin_balance['1weekusd'] }}</div></td>
+
+          </tr>
+          <tr class="warning">
+            <td><div class="smallText">3</div></td>
+            <td><div class="smallText">1 Month</div></td>
+            <td><div class="smallText">{{ coin_balance['1month'] }}</div></td>
+            <td><div class="smallText">${{ coin_balance['1monthusd'] }}</div></td>
+
+          </tr>
+          <tr class="warning">
+            <td><div class="smallText">4</div></td>
+            <td><div class="smallText">1 year</div></td>
+            <td><div class="smallText">{{ coin_balance['1year'] }} </div></td>
+            <td><div class="smallText">${{ coin_balance['1yearusd'] }}</div></td>
+
+          </tr>
+        </tr>
+      </tr>
+    </table>
   </div>
+</div>
+</div>
+</div>
 </body>
 
 

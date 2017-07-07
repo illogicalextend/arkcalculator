@@ -1,6 +1,7 @@
 from arky import api
 from arky.util import stats
 from decimal import Decimal
+from collections import Counter
 import urllib, json
 
 def get_delegates():
@@ -9,10 +10,16 @@ def get_delegates():
     delegates = delegate.getDelegates()
     return delegates['delegates']
 
+def top_delegate(del_payments):
+    c = Counter()
+    for transaction in del_payments:
+        c[transaction["del_username"]] += 1
+    return c.most_common()[0][0]
+
 def del_payments(user_address):
     api.use("ark")
     history = stats.getHistory(user_address)
-    del_payment = []
+    del_payments = []
     delegates_list = get_delegates()
     total_received = 0.0
     for transaction in history:
@@ -23,9 +30,11 @@ def del_payments(user_address):
                 transaction["amount"] = float(Decimal(transaction["amount"]) / 100000000)
                 transaction["fee"] = float(Decimal(transaction["fee"]) / 100000000)
                 transaction["del_username"] = delegate['username']
-                del_payment.append(transaction)
+                del_payments.append(transaction)
                 total_received = total_received + transaction["amount"]
-    return {'del_payment':del_payment, 'total_received':total_received}
+                break
+    #top_delegate(del_payments)
+    return {'del_payments':del_payments, 'total_received':total_received, 'top_delegate':top_delegate(del_payments)}
 
 def get_usd():
     url = "https://api.coinmarketcap.com/v1/ticker/ark/"
