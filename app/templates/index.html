@@ -74,9 +74,10 @@
         <table class="table table-bordered">
           <caption>Delegate Payments Received</caption>
           <tr class="info">
-            <th><div class="smallText">Position</div></th>
+            <th><div class="smallText"></div></th>
             <th><div class="smallText">Amount</div></th>
-            <th><div class="smallText">Timestamp</div></th>
+            <th><div class="smallText">Time</div></th>
+            <th><div class="smallText">Transaction</div></th>
             <th><div class="smallText">Sender</div></th>
             <th><div class="smallText">Fee</div></th>
             <th><div class="smallText">Del Name</div></th>
@@ -86,7 +87,8 @@
                 <td><div class="smallText">{{ loop.index }}</div></td>
                 <td><div class="smallText">{{ payment['amount'] }}</div></td>
                 <td><div class="smallText">{{ payment['timestamp'] }}</div></td>
-                <td><div class="smallText">{{ payment['senderId'] }}.. </div></td>
+                <td><div class="smallText"><a href="http://explorer.ark.io/tx/{{ payment['id'] }}">{{ payment['id_truncate'] }}..</a></div></td>
+                <td><div class="smallText"><a href="http://explorer.ark.io/address/{{ payment['senderId'] }}">{{ payment['senderId_truncate'] }}..</a></div></td>
                 <td><div class="smallText">{{ payment['fee'] }} </div></td>
                 <td><div class="smallText">{{ payment['del_username'] }} </div></td>
               </tr>
