@@ -30,8 +30,8 @@ def del_payments(user_address):
                 transaction["amount"] = float(Decimal(transaction["amount"]) / 100000000)
                 transaction["fee"] = float(Decimal(transaction["fee"]) / 100000000)
                 transaction["del_username"] = delegate['username']
-                del_payments.append(transaction)
                 total_received = total_received + transaction["amount"]
+                del_payments.append(transaction)
                 break
     #top_delegate(del_payments)
     return {'del_payments':del_payments, 'total_received':total_received, 'top_delegate':top_delegate(del_payments)}
