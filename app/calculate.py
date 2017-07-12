@@ -26,11 +26,11 @@ def del_payments(user_address):
         for delegate in delegates_list:
             if transaction["senderId"] == delegate['address']:
                 transaction["senderId"] = str(transaction["senderId"])
-                transaction["senderId_truncate"] = transaction["senderId"][0:8]
+                transaction["senderId_truncate"] = transaction["senderId"][0:6]
                 transaction["amount"] = float(Decimal(transaction["amount"]) / 100000000)
                 transaction["fee"] = float(Decimal(transaction["fee"]) / 100000000)
                 transaction["del_username"] = delegate['username']
-                transaction["id_truncate"] = transaction["id"][0:8]
+                transaction["id_truncate"] = transaction["id"][0:6]
                 total_received = total_received + transaction["amount"]
                 del_payments.append(transaction)
                 break
